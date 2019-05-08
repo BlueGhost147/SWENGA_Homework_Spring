@@ -109,6 +109,6 @@ public class SongService {
 	 * @return
 	 */
 	public boolean remove(int id) {
-		return songs.remove(new SongModel(id, null, null, null,null));
+		return songs.remove(new SongModel(id, null, null, null,null, 0));
 	}
 }

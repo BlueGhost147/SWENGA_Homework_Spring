@@ -56,6 +56,28 @@
 								<input class="form_datetime" id="inputReleaseDate" placeholder="Release date" type="text" readonly name="releaseDate" th:value="${song} ? ${#dates.format(song.releaseDate, 'dd.MM.yyyy')}">
 							</div>
 						</div>
+						
+						<!--  ----------------  price ---------------- -->
+						<div class="form-group">
+							<label for="inputPrice" class="col-md-2 control-label">Price</label>
+							<div class="col-md-10">
+								<input class="form-control" id="inputPrice" type="text" name="price" th:value="${song} ? ${song.price}">
+							</div>
+						</div>
+						
+						<!--  ----------------  parentalRating ---------------- -->
+						<div class="form-group">
+							<label for="inputParentalRating" class="col-md-2 control-label">Parental ratings</label>
+							<div class="col-md-10">
+								
+								<select class="form-control" id="inputParentalRating" name="parentalRating">
+    								<option th:each="parentalRating : ${T(at.fh.swenga.enums.ParentalRating).values()}" th:value="${parentalRating}" th:text="${parentalRating}" th:selected="${song} ? ${parentalRating} == ${song.parentalRating}  : false"></option>
+    							</select>
+    						<!-- 
+								<input class="form-control" id="inputParentalRating" type="text" name="parentalRating" th:value="${song} ? ${song.parentalRating}">
+							-->
+							</div>
+						</div>
 
 						<!-- --------------  buttons ---------------- -->
 						<div class="form-group">

@@ -1,6 +1,7 @@
 package at.fh.swenga.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import at.fh.swenga.enums.ParentalRating;
 import at.fh.swenga.model.SongModel;
 import at.fh.swenga.model.SongService;
 
@@ -36,16 +38,17 @@ public class SongManagerController {
 		
 		int idInc = 100;
 		songService.remove(idInc);
-		songService.addSong(new SongModel(idInc++,"Under Pressure","Queen","Hot Space",new Date()));
+		songService.addSong(new SongModel(idInc++,"Under Pressure","Queen","Hot Space",new Date(),1.99,ParentalRating.Everyone));
 		songService.remove(idInc);
-		songService.addSong(new SongModel(idInc++,"Man On The Moon","R.E.M.","Automatic For The People",new Date()));
+		songService.addSong(new SongModel(idInc++,"Man On The Moon","R.E.M.","Automatic For The People",new Date(),1.99,ParentalRating.Everyone));
 		songService.remove(idInc);
-		songService.addSong(new SongModel(idInc++,"King for a Day","Battle Beast","Bringer of Pain",new Date()));
+		songService.addSong(new SongModel(idInc++,"King for a Day","Battle Beast","Bringer of Pain",new Date(),1.29,ParentalRating.Mature));
 		songService.remove(idInc);
-		songService.addSong(new SongModel(idInc++,"Hammer High","Hammerfall","Built To Last",new Date()));
+		songService.addSong(new SongModel(idInc++,"Hammer High","Hammerfall","Built To Last",new Date(),1.59,ParentalRating.Everyone));
 		songService.remove(idInc);
-		songService.addSong(new SongModel(idInc++,"F.T.L.","Keldian","Outbound",new Date()));
+		songService.addSong(new SongModel(idInc++,"F.T.L.","Keldian","Outbound",new Date(),1.29,ParentalRating.Everyone));
 
+		List<SongModel> ajfa = songService.getAllSongs();
 		model.addAttribute("songs", songService.getAllSongs());
 		return "listSongs";
 	}
@@ -135,6 +138,8 @@ public class SongManagerController {
 			song.setArtist(changedSongModel.getArtist());
 			song.setAlbum(changedSongModel.getAlbum());
 			song.setReleaseDate(changedSongModel.getReleaseDate());
+			song.setPrice(changedSongModel.getPrice());
+			song.setParentalRating(changedSongModel.getParentalRating());
 			model.addAttribute("message", "Changed song with the ID " + changedSongModel.getId());
 		}
 

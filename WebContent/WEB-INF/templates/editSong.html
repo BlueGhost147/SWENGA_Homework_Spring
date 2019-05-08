@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:include="~{includes/bootstrap :: bootstrapMeta}" th:remove="tag" />
+	<title>Music Manager</title>
+	<div th:include="~{includes/bootstrap :: bootstrapCSS}" th:remove="tag" />
+	<link href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container" role="main">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<form class="form-horizontal" method="post" th:action="${song} ? @{/editSong(id=${song.id})} : @{/addSong}">
+					<fieldset>
+						<legend th:text="${song}? 'Change Song' : 'New Song'">New Song</legend>
+
+						<!--  ----------------  id ---------------- -->
+						<div class="form-group">
+							<label for="inputId" class="col-md-2 control-label">Id</label>
+							<div class="col-md-10">
+								<input class="form-control" id="inputId" type="text" name="id" th:value="${song} ? ${song.id}" th:readonly="${song}">
+							</div>
+						</div>
+
+						<!-- --------------  SongName ---------------- -->
+						<div class="form-group">
+							<label for="inputSongName" class="col-md-2 control-label">Title
+							</label>
+							<div class="col-md-10">
+								<input class="form-control" id="inputSongName" type="text" name="songName" th:value="${song} ? ${song.songName}">
+							</div>
+						</div>
+						<!-- --------------  Album ---------------- -->
+						<div class="form-group">
+							<label for="inputAlbum" class="col-md-2 control-label">Album
+							</label>
+							<div class="col-md-10">
+								<input class="form-control" id="inputAlbum" type="text" name="album" th:value="${song} ? ${song.album}">
+							</div>
+						</div>
+						<!-- --------------  Artist ---------------- -->
+						<div class="form-group">
+							<label for="inputArtist" class="col-md-2 control-label">Artist
+							</label>
+							<div class="col-md-10">
+								<input class="form-control" id="inputArtist" type="text" name="artist" th:value="${song} ? ${song.artist}">
+							</div>
+						</div>
+
+						<!-- --------------  releaseDate ---------------- -->
+						<div class="form-group">
+							<label for="inputReleaseDate" class="col-md-2 control-label">Release date</label>
+							<div class="col-md-10">
+								<input class="form_datetime" id="inputReleaseDate" placeholder="Release date" type="text" readonly name="releaseDate" th:value="${song} ? ${#dates.format(song.releaseDate, 'dd.MM.yyyy')}">
+							</div>
+						</div>
+
+						<!-- --------------  buttons ---------------- -->
+						<div class="form-group">
+							<div class="col-md-10 col-md-offset-2">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<a href="listSongs" class="btn btn-default">
+									Cancel
+								</a>
+							</div>
+						</div>
+
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	<!--  End of container -->
+	<div th:include="~{includes/bootstrap :: bootstrapJS}" th:remove="tag" />
+
+	<!-- JS for Datetime picker -->
+	<script type="text/javascript" src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+	<script>
+		$(function () {
+
+			$(".form_datetime").datetimepicker({
+				format: "dd.mm.yyyy",
+				autoclose: true,
+				todayBtn: true,
+				pickerPosition: "bottom-left",
+				minView: 2
+			});
+
+		});
+	</script>
+
+</body>
+
+</html>
